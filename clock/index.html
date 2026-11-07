@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Minimal Clock</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 8px;
+      background: transparent;
+      font-family: Arial, sans-serif;
+    }
+    .clock {
+      background: #FFFFFF;
+      border: 1px solid #E5E5E5;
+      border-radius: 12px;
+      padding: 22px;
+      color: #111111;
+      width: 100%;
+    }
+    .label {
+      font-size: 11px;
+      color: #777777;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+    }
+    .time {
+      font-size: clamp(26px, 6vw, 46px);
+      font-weight: 600;
+      letter-spacing: -1.5px;
+      margin: 12px 0 5px;
+      font-variant-numeric: tabular-nums;
+    }
+    .date {
+      font-size: 14px;
+      color: #777777;
+    }
+    .line {
+      height: 1px;
+      background: #E5E5E5;
+      margin: 17px 0 12px;
+    }
+    .zone {
+      font-size: 11px;
+      color: #888888;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+  <div class="clock">
+    <div class="label">DIGITAL CLOCK</div>
+    <div class="time" id="time">--:-- --</div>
+    <div class="date" id="date">Loading...</div>
+    <div class="line"></div>
+    <div class="zone">LOS ANGELES · PACIFIC TIME</div>
+  </div>
+  <script>
+    const zone = "America/Los_Angeles";
+
+    function updateClock() {
+      const now = new Date();
+
+      document.getElementById("time").textContent =
+        new Intl.DateTimeFormat("en-US", {
+          timeZone: zone,
+          hour: "2-digit",
+          minute: "2-digit",
+          hour12: true
+        }).format(now);
+
+      document.getElementById("date").textContent =
+        new Intl.DateTimeFormat("en-US", {
+          timeZone: zone,
+          weekday: "long",
+          month: "long",
+          day: "numeric",
+          year: "numeric"
+        }).format(now);
+    }
+
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+</body>
+</html>
