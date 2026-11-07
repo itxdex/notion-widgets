@@ -1,11 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Notion Black & Gray Clock</title>
 
   <style>
@@ -26,14 +23,24 @@
       padding: 6px 12px 8px 6px;
     }
 
-    .clock {
+    .card {
       width: 100%;
-      min-width: 0;
+      min-height: 180px;
       background: #FFFFFF;
       border: 1px solid #E5E5E5;
-      border-radius: 12px;
-      padding: 14px;
+      border-radius: 14px;
+      padding: 16px 18px;
       color: #111111;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .top {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
 
     .header {
@@ -44,26 +51,26 @@
     }
 
     .label {
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 600;
-      letter-spacing: 1px;
+      letter-spacing: 1.2px;
       color: #777777;
       white-space: nowrap;
     }
 
     .clock-icon {
-      width: 15px;
-      height: 15px;
-      flex-shrink: 0;
+      width: 16px;
+      height: 16px;
       color: #888888;
+      flex-shrink: 0;
     }
 
     .time {
-      margin: 10px 0 5px;
-      font-size: clamp(22px, 8vw, 36px);
+      margin-top: 2px;
+      font-size: clamp(24px, 8vw, 36px);
       font-weight: 700;
       letter-spacing: -1px;
-      line-height: 1.2;
+      line-height: 1.15;
       color: #111111;
       white-space: nowrap;
       font-variant-numeric: tabular-nums;
@@ -76,11 +83,15 @@
       white-space: nowrap;
     }
 
+    .bottom {
+      margin-top: 14px;
+    }
+
     .divider {
       width: 100%;
       height: 1px;
       background: #E5E5E5;
-      margin: 13px 0 10px;
+      margin-bottom: 12px;
     }
 
     .timezone {
@@ -96,17 +107,18 @@
         padding: 5px 10px 6px 5px;
       }
 
-      .clock {
-        padding: 10px;
-        border-radius: 10px;
+      .card {
+        min-height: 170px;
+        padding: 12px 14px;
+        border-radius: 12px;
       }
 
       .label {
-        font-size: 9px;
+        font-size: 10px;
       }
 
       .time {
-        font-size: 23px;
+        font-size: 24px;
       }
 
       .date {
@@ -121,38 +133,31 @@
 </head>
 
 <body>
+  <div class="card">
+    <div class="top">
+      <div class="header">
+        <span class="label">DIGITAL CLOCK</span>
 
-  <div class="clock">
+        <svg class="clock-icon"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.7"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+          <circle cx="12" cy="12" r="9"></circle>
+          <path d="M12 7v5l3 2"></path>
+        </svg>
+      </div>
 
-    <div class="header">
-      <span class="label">DIGITAL CLOCK</span>
-
-      <svg class="clock-icon"
-           viewBox="0 0 24 24"
-           fill="none"
-           stroke="currentColor"
-           stroke-width="1.7"
-           stroke-linecap="round"
-           stroke-linejoin="round">
-        <circle cx="12" cy="12" r="9"></circle>
-        <path d="M12 7v5l3 2"></path>
-      </svg>
+      <div class="time" id="time">--:-- --</div>
+      <div class="date" id="date">Loading...</div>
     </div>
 
-    <div class="time" id="time">
-      --:-- --
+    <div class="bottom">
+      <div class="divider"></div>
+      <div class="timezone">LOS ANGELES · PT</div>
     </div>
-
-    <div class="date" id="date">
-      Loading...
-    </div>
-
-    <div class="divider"></div>
-
-    <div class="timezone">
-      LOS ANGELES · PT
-    </div>
-
   </div>
 
   <script>
@@ -181,9 +186,7 @@
     }
 
     updateClock();
-
     setInterval(updateClock, 1000);
   </script>
-
 </body>
 </html>
