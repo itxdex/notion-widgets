@@ -3,8 +3,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Notion Weather - Auto Theme</title>
+<meta name="viewport"
+      content="width=device-width, initial-scale=1">
+
+<title>Notion World Clock</title>
 
 <style>
 * {
@@ -16,7 +18,6 @@
   --text-primary: #111111;
   --text-secondary: #777777;
   --text-muted: #888888;
-  --text-detail: #555555;
   --divider: #E5E5E5;
 }
 
@@ -25,7 +26,6 @@
     --text-primary: #F5F5F5;
     --text-secondary: #AAAAAA;
     --text-muted: #999999;
-    --text-detail: #CCCCCC;
     --divider: #373737;
   }
 }
@@ -47,16 +47,18 @@ body {
   width: 100%;
   height: 122px;
   padding: 8px 14px;
+
   background: transparent;
   border: none;
   border-radius: 0;
   box-shadow: none;
   outline: none;
-  color: var(--text-primary);
 
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  color: var(--text-primary);
 }
 
 .header {
@@ -75,59 +77,44 @@ body {
   white-space: nowrap;
 }
 
-.weather-icon {
+.icon {
   width: 15px;
   height: 15px;
   color: var(--text-muted);
   flex-shrink: 0;
 }
 
-.main {
+.clocks {
   display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-top: 6px;
-  min-width: 0;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 7px;
 }
 
-.temp {
-  font-size: clamp(22px, 7vw, 27px);
+.city-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.city {
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.time {
+  font-size: 13px;
   font-weight: 700;
-  letter-spacing: -0.8px;
-  line-height: 1.1;
+  letter-spacing: -0.2px;
+  line-height: 1.2;
   color: var(--text-primary);
+  text-align: right;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
-}
-
-.summary {
-  min-width: 0;
-}
-
-.condition {
-  font-size: 11px;
-  line-height: 1.2;
-  color: var(--text-detail);
-  white-space: nowrap;
-}
-
-.feels {
-  margin-top: 3px;
-  font-size: 11px;
-  line-height: 1.2;
-  color: var(--text-secondary);
-  white-space: nowrap;
-}
-
-.details {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-top: 6px;
-  font-size: 10px;
-  line-height: 1.2;
-  color: var(--text-secondary);
 }
 
 .bottom {
@@ -137,78 +124,35 @@ body {
 
 .footer {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   gap: 6px;
+
   font-size: 10px;
   line-height: 1.2;
-  color: var(--text-muted);
-}
-
-.location {
-  white-space: nowrap;
   letter-spacing: 0.3px;
-}
-
-.credit {
-  font-size: 9px;
-}
-
-.credit a {
   color: var(--text-muted);
-  text-decoration: none;
-  white-space: nowrap;
 }
 
-.credit a:hover {
-  text-decoration: underline;
-}
-
-@media (max-width: 300px) {
+@media (max-width: 220px) {
   .card {
     padding: 8px 10px;
-  }
-
-  .main {
-    gap: 6px;
-  }
-
-  .temp {
-    font-size: 22px;
   }
 
   .label {
     font-size: 9px;
   }
 
-  .condition, .feels {
+  .city {
     font-size: 10px;
   }
 
-  .details {
-    gap: 5px;
-    font-size: 9px;
-  }
-
-  .footer, .credit {
-    font-size: 8px;
-  }
-}
-
-@media (max-width: 240px) {
-  .card {
-    height: auto;
-    min-height: 122px;
-    gap: 10px;
-  }
-
-  .condition, .feels,
-  .location, .credit a {
-    white-space: normal;
+  .time {
+    font-size: 11px;
   }
 
   .footer {
-    flex-wrap: wrap;
+    font-size: 8px;
   }
 }
 </style>
@@ -221,168 +165,105 @@ body {
   <div class="top">
 
     <div class="header">
-      <span class="label">CURRENT WEATHER</span>
+      <span class="label">WORLD CLOCK</span>
 
-      <svg class="weather-icon"
+      <svg class="icon"
            viewBox="0 0 24 24"
            fill="none"
            stroke="currentColor"
            stroke-width="1.7"
            stroke-linecap="round"
            stroke-linejoin="round">
-        <path d="M20 16.5A4.5 4.5 0 0 0 16 10
-                 a6 6 0 0 0-11 2
-                 A4 4 0 0 0 6 20h12
-                 a3 3 0 0 0 2-3.5Z"/>
-        <path d="M16 2v3M21 7l-2 2"/>
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M3 12h18"/>
+        <path d="M12 3a15 15 0 0 1 0 18"/>
+        <path d="M12 3a15 15 0 0 0 0 18"/>
       </svg>
     </div>
 
-    <div class="main">
-      <div class="temp" id="temp">--°F</div>
+    <div class="clocks">
 
-      <div class="summary">
-        <div class="condition" id="condition">
-          Loading weather...
-        </div>
-        <div class="feels" id="feels">
-          Feels like --°F
-        </div>
+      <div class="city-row">
+        <span class="city">Los Angeles</span>
+        <span class="time" id="la">--:-- --</span>
       </div>
-    </div>
 
-    <div class="details">
-      <span id="high">H: --°</span>
-      <span id="low">L: --°</span>
-      <span id="humidity">Humidity: --%</span>
-    </div>
+      <div class="city-row">
+        <span class="city">Houston</span>
+        <span class="time" id="houston">--:-- --</span>
+      </div>
 
+      <div class="city-row">
+        <span class="city">New York</span>
+        <span class="time" id="ny">--:-- --</span>
+      </div>
+
+    </div>
   </div>
 
   <div class="bottom">
     <div class="footer">
-
-      <span class="location">
-        LOS ANGELES · CA
-      </span>
-
-      <span class="credit">
-        <a href="https://open-meteo.com/"
-           target="_blank"
-           rel="noopener noreferrer">
-          Weather by Open-Meteo
-        </a>
-      </span>
-
+      <span>US TIME ZONES</span>
+      <span id="date">---</span>
     </div>
   </div>
 
 </div>
 
 <script>
-const LATITUDE = 34.0522;
-const LONGITUDE = -118.2437;
-
-const API = new URL(
-  "https://api.open-meteo.com/v1/forecast"
-);
-
-API.searchParams.set("latitude", LATITUDE);
-API.searchParams.set("longitude", LONGITUDE);
-
-API.searchParams.set(
-  "current",
-  "temperature_2m,relative_humidity_2m," +
-  "apparent_temperature,weather_code,is_day"
-);
-
-API.searchParams.set(
-  "daily",
-  "temperature_2m_max,temperature_2m_min"
-);
-
-API.searchParams.set("temperature_unit", "fahrenheit");
-API.searchParams.set("timezone", "America/Los_Angeles");
-API.searchParams.set("forecast_days", "1");
-
-const el = id => document.getElementById(id);
-const round = value => Math.round(value);
-
-function weatherDescription(code) {
-  if (code === 0) return "Clear Sky";
-  if (code === 1) return "Mostly Clear";
-  if (code === 2) return "Partly Cloudy";
-  if (code === 3) return "Overcast";
-  if ([45, 48].includes(code)) return "Foggy";
-  if ([51, 53, 55, 56, 57].includes(code))
-    return "Drizzle";
-  if ([61, 63, 65, 66, 67].includes(code))
-    return "Rain";
-  if ([71, 73, 75, 77, 85, 86].includes(code))
-    return "Snow";
-  if ([80, 81, 82].includes(code))
-    return "Rain Showers";
-  if ([95, 96, 99].includes(code))
-    return "Thunderstorm";
-  return "Weather Unavailable";
-}
-
-async function updateWeather() {
-  try {
-    const response = await fetch(API.toString(), {
-      cache: "no-store"
-    });
-
-    if (!response.ok) {
-      throw new Error("Weather API error");
-    }
-
-    const data = await response.json();
-    const current = data.current;
-    const daily = data.daily;
-
-    if (
-      !current || !daily ||
-      !Number.isFinite(current.temperature_2m)
-    ) {
-      throw new Error("Missing weather data");
-    }
-
-    el("temp").textContent =
-      round(current.temperature_2m) + "°F";
-
-    el("condition").textContent =
-      weatherDescription(current.weather_code);
-
-    el("feels").textContent =
-      "Feels like " +
-      round(current.apparent_temperature) + "°F";
-
-    el("high").textContent =
-      "H: " + round(daily.temperature_2m_max[0]) + "°";
-
-    el("low").textContent =
-      "L: " + round(daily.temperature_2m_min[0]) + "°";
-
-    el("humidity").textContent =
-      "Humidity: " +
-      round(current.relative_humidity_2m) + "%";
-
-  } catch (error) {
-    el("condition").textContent =
-      "Weather unavailable";
-
-    el("feels").textContent =
-      "Please try again later";
-
-    el("high").textContent = "H: --°";
-    el("low").textContent = "L: --°";
-    el("humidity").textContent = "Humidity: --%";
+const cities = [
+  {
+    id: "la",
+    zone: "America/Los_Angeles"
+  },
+  {
+    id: "houston",
+    zone: "America/Chicago"
+  },
+  {
+    id: "ny",
+    zone: "America/New_York"
   }
+];
+
+const formatters = cities.map(city => ({
+  id: city.id,
+  formatter: new Intl.DateTimeFormat(
+    "en-US",
+    {
+      timeZone: city.zone,
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true
+    }
+  )
+}));
+
+const dateFormatter = new Intl.DateTimeFormat(
+  "en-US",
+  {
+    timeZone: "America/Los_Angeles",
+    month: "short",
+    day: "numeric"
+  }
+);
+
+function updateClocks() {
+  const now = new Date();
+
+  formatters.forEach(city => {
+    document.getElementById(
+      city.id
+    ).textContent = city.formatter.format(now);
+  });
+
+  document.getElementById(
+    "date"
+  ).textContent = dateFormatter.format(now);
 }
 
-updateWeather();
-setInterval(updateWeather, 15 * 60 * 1000);
+updateClocks();
+setInterval(updateClocks, 1000);
 </script>
 
 </body>
