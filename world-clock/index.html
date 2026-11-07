@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Notion World Clock</title>
+<title>World Clock Borderless V2</title>
 
 <style>
 * {
@@ -15,7 +15,7 @@ html, body {
   margin: 0;
   padding: 0;
   width: 100%;
-  background: transparent;
+  background: transparent !important;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -24,17 +24,23 @@ body {
 }
 
 .card {
-  position: static;
+  position: static !important;
+  top: auto !important;
+  transform: none !important;
+
   width: 100%;
   height: 122px;
   padding: 8px 14px;
-  background: transparent;
-  border: none;
-  border-radius: 0;
-  box-shadow: none;
-  outline: none;
-  color: #111111;
 
+  background: transparent !important;
+  border: 0 !important;
+  border-width: 0 !important;
+  border-style: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+
+  color: #111111;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -42,8 +48,8 @@ body {
 
 .header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   gap: 6px;
 }
 
@@ -77,30 +83,31 @@ body {
 }
 
 .city {
+  color: #555555;
   font-size: 11px;
   line-height: 1.2;
-  color: #555555;
   white-space: nowrap;
 }
 
 .time {
+  color: #111111;
   font-size: 12px;
   font-weight: 600;
   line-height: 1.2;
-  color: #111111;
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
 
 .bottom {
+  border: 0;
   border-top: 1px solid #E5E5E5;
   padding-top: 7px;
 }
 
 .footer {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   gap: 6px;
   font-size: 9px;
   line-height: 1.2;
@@ -133,8 +140,11 @@ body {
 </head>
 
 <body>
+
 <div class="card">
+
   <div class="top">
+
     <div class="header">
       <span class="label">WORLD CLOCK</span>
 
@@ -153,6 +163,7 @@ body {
     </div>
 
     <div class="clocks">
+
       <div class="city-row">
         <span class="city">Los Angeles</span>
         <span class="time" id="la">--:-- --</span>
@@ -167,7 +178,9 @@ body {
         <span class="city">New York</span>
         <span class="time" id="ny">--:-- --</span>
       </div>
+
     </div>
+
   </div>
 
   <div class="bottom">
@@ -176,6 +189,7 @@ body {
       <span id="date">---</span>
     </div>
   </div>
+
 </div>
 
 <script>
@@ -197,26 +211,29 @@ const cities = [
 function updateClocks() {
   const now = new Date();
 
-  cities.forEach(city => {
-    document.getElementById(city.id).textContent =
-      new Intl.DateTimeFormat("en-US", {
-        timeZone: city.zone,
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true
-      }).format(now);
-  });
-
-  document.getElementById("date").textContent =
-    new Intl.DateTimeFormat("en-US", {
-      timeZone: "America/Los_Angeles",
-      month: "short",
-      day: "numeric"
+  for (const city of cities) {
+    const time = new Intl.DateTimeFormat("en-US", {
+      timeZone: city.zone,
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true
     }).format(now);
+
+    document.getElementById(city.id).textContent = time;
+  }
+
+  const date = new Intl.DateTimeFormat("en-US", {
+    timeZone: "America/Los_Angeles",
+    month: "short",
+    day: "numeric"
+  }).format(now);
+
+  document.getElementById("date").textContent = date;
 }
 
 updateClocks();
 setInterval(updateClocks, 1000);
 </script>
+
 </body>
 </html>
