@@ -1,70 +1,304 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Notion Weather — Black & Gray</title>
-<style>
-*{box-sizing:border-box}
-html,body{margin:0;width:100%;background:transparent;font-family:Arial,Helvetica,sans-serif}
-body{padding:6px 12px 8px 6px}
-.card{width:100%;background:#fff;border:1px solid #e5e5e5;border-radius:12px;padding:14px;color:#111;min-width:0}
-.top,.bottom{display:flex;justify-content:space-between;align-items:center;gap:8px}
-.label{font-size:10px;letter-spacing:1px;font-weight:600;color:#777;white-space:nowrap}
-.icon{width:19px;height:19px;flex-shrink:0;color:#777}
-.main{display:flex;align-items:center;gap:12px;margin:12px 0 10px;min-width:0}
-.temp{font-size:clamp(27px,8vw,37px);font-weight:700;letter-spacing:-1px;line-height:1.2;white-space:nowrap;font-variant-numeric:tabular-nums}
-.condition{font-size:12px;color:#444;margin-bottom:4px}
-.feels{font-size:11px;color:#777}
-.details{display:flex;flex-wrap:wrap;gap:5px 13px;color:#777;font-size:11px}
-.divider{border:0;border-top:1px solid #e5e5e5;margin:13px 0 10px}
-.bottom{font-size:10px;color:#888;letter-spacing:.3px}
-a{color:inherit;text-decoration:none}a:hover{text-decoration:underline}
-@media(max-width:235px){.card{padding:10px}.main{gap:7px}.temp{font-size:25px}.condition{font-size:11px}.feels{font-size:10px}.bottom{font-size:9px}}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Notion Black & Gray Weather</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      background: transparent;
+      font-family: Arial, Helvetica, sans-serif;
+      overflow-x: hidden;
+    }
+
+    body {
+      padding: 6px 12px 8px 6px;
+    }
+
+    .card {
+      width: 100%;
+      min-height: 180px;
+      background: #FFFFFF;
+      border: 1px solid #E5E5E5;
+      border-radius: 14px;
+      padding: 16px 18px;
+      color: #111111;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .top {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      color: #777777;
+      white-space: nowrap;
+    }
+
+    .weather-icon {
+      width: 18px;
+      height: 18px;
+      color: #888888;
+      flex-shrink: 0;
+    }
+
+    .main {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-top: 2px;
+    }
+
+    .temp {
+      font-size: clamp(24px, 8vw, 36px);
+      font-weight: 700;
+      letter-spacing: -1px;
+      line-height: 1.1;
+      white-space: nowrap;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .summary {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      padding-top: 4px;
+      min-width: 0;
+    }
+
+    .condition {
+      font-size: 12px;
+      color: #444444;
+      line-height: 1.35;
+      white-space: nowrap;
+    }
+
+    .feels {
+      font-size: 12px;
+      color: #888888;
+      line-height: 1.35;
+      white-space: nowrap;
+    }
+
+    .details {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      font-size: 12px;
+      color: #777777;
+      line-height: 1.4;
+      margin-top: 2px;
+    }
+
+    .bottom {
+      margin-top: 14px;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: #E5E5E5;
+      margin-bottom: 12px;
+    }
+
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 10px;
+      color: #888888;
+      letter-spacing: 0.4px;
+    }
+
+    .footer-left {
+      white-space: nowrap;
+    }
+
+    .footer-right a {
+      color: #888888;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .footer-right a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 240px) {
+      body {
+        padding: 5px 10px 6px 5px;
+      }
+
+      .card {
+        min-height: 170px;
+        padding: 12px 14px;
+        border-radius: 12px;
+      }
+
+      .label {
+        font-size: 10px;
+      }
+
+      .temp {
+        font-size: 24px;
+      }
+
+      .condition,
+      .feels,
+      .details {
+        font-size: 11px;
+      }
+
+      .footer {
+        font-size: 9px;
+      }
+    }
+  </style>
 </head>
+
 <body>
-<section class="card" aria-label="Los Angeles weather">
- <div class="top"><span class="label">CURRENT WEATHER</span>
- <svg class="icon" id="weatherIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
- <div class="main"><div class="temp" id="temp">--°F</div><div><div class="condition" id="condition">Loading weather...</div><div class="feels" id="feels">Feels like --°F</div></div></div>
- <div class="details"><span id="high">H: --°</span><span id="low">L: --°</span><span id="humidity">Humidity: --%</span></div>
- <hr class="divider">
- <div class="bottom"><span>LOS ANGELES · CA</span><a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Weather by Open-Meteo</a></div>
-</section>
-<script>
-const api=new URL('https://api.open-meteo.com/v1/forecast');
-api.search=new URLSearchParams({latitude:'34.0522',longitude:'-118.2437',current:'temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,is_day',daily:'temperature_2m_max,temperature_2m_min',temperature_unit:'fahrenheit',timezone:'America/Los_Angeles',forecast_days:'1'}).toString();
-const $=id=>document.getElementById(id);
-const describe=c=>({0:'Clear Sky',1:'Mostly Clear',2:'Partly Cloudy',3:'Cloudy',45:'Fog',48:'Fog',51:'Drizzle',53:'Drizzle',55:'Drizzle',56:'Freezing Drizzle',57:'Freezing Drizzle',61:'Rain',63:'Rain',65:'Heavy Rain',66:'Freezing Rain',67:'Freezing Rain',71:'Snow',73:'Snow',75:'Heavy Snow',77:'Snow Grains',80:'Rain Showers',81:'Rain Showers',82:'Heavy Showers',85:'Snow Showers',86:'Snow Showers',95:'Thunderstorm',96:'Thunderstorm',99:'Thunderstorm'})[c]||'Conditions Unavailable';
-function iconFor(code,day){
- const sun='<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>';
- const moon='<path d="M20.9 13A9 9 0 0 1 11 3.1 9 9 0 1 0 20.9 13Z"/>';
- const cloud='<path d="M7 18h11a4 4 0 0 0 0-8 6 6 0 0 0-11.4-1.5A4.8 4.8 0 0 0 7 18Z"/>';
- if(code===0)return day?sun:moon;
- if([1,2].includes(code))return cloud;
- if([3,45,48].includes(code))return cloud;
- if([51,53,55,56,57,61,63,65,66,67,80,81,82].includes(code))return cloud+'<path d="m8 20-1 2M13 20l-1 2M18 20l-1 2"/>';
- if([71,73,75,77,85,86].includes(code))return cloud+'<path d="M9 21h.01M14 21h.01M19 21h.01"/>';
- return cloud;
-}
-const fmt=v=>Number.isFinite(v)?Math.round(v):null;
-async function updateWeather(){
- try{
-  const response=await fetch(api.toString(),{cache:'no-store'});
-  if(!response.ok)throw Error('HTTP '+response.status);
-  const data=await response.json(),c=data.current,d=data.daily;
-  if(!c||!d||fmt(c.temperature_2m)===null)throw Error('Missing weather values');
-  $('temp').textContent=fmt(c.temperature_2m)+'°F';
-  $('condition').textContent=describe(c.weather_code);
-  $('feels').textContent=fmt(c.apparent_temperature)===null?'Feels like unavailable':'Feels like '+fmt(c.apparent_temperature)+'°F';
-  $('high').textContent='H: '+(fmt(d.temperature_2m_max?.[0])??'--')+'°';
-  $('low').textContent='L: '+(fmt(d.temperature_2m_min?.[0])??'--')+'°';
-  $('humidity').textContent='Humidity: '+(fmt(c.relative_humidity_2m)??'--')+'%';
-  $('weatherIcon').innerHTML=iconFor(c.weather_code,c.is_day===1);
- }catch(e){$('condition').textContent='Weather unavailable';$('feels').textContent='Please try again later';}
-}
-updateWeather();setInterval(updateWeather,15*60*1000);
-</script>
+  <div class="card">
+    <div class="top">
+      <div class="header">
+        <span class="label">CURRENT WEATHER</span>
+
+        <svg class="weather-icon"
+             viewBox="0 0 24 24"
+             fill="none"
+             stroke="currentColor"
+             stroke-width="1.7"
+             stroke-linecap="round"
+             stroke-linejoin="round">
+          <path d="M21 15.5a4.5 4.5 0 0 1-4.5 4.5H8
+                   a4 4 0 0 1-.7-7.9A5.5 5.5 0 0 1 18 10
+                   a4 4 0 0 1 3 5.5Z"></path>
+          <path d="M16.5 3.5a4.5 4.5 0 1 0 0 9
+                   4.5 4.5 0 0 0 0-9Z"></path>
+        </svg>
+      </div>
+
+      <div class="main">
+        <div class="temp" id="temp">--°F</div>
+
+        <div class="summary">
+          <div class="condition" id="condition">Loading weather...</div>
+          <div class="feels" id="feels">Feels like --°F</div>
+        </div>
+      </div>
+
+      <div class="details">
+        <span id="high">H: --°</span>
+        <span id="low">L: --°</span>
+        <span id="humidity">Humidity: --%</span>
+      </div>
+    </div>
+
+    <div class="bottom">
+      <div class="divider"></div>
+
+      <div class="footer">
+        <div class="footer-left">LOS ANGELES · CA</div>
+        <div class="footer-right">
+          <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">
+            Weather by Open-Meteo
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const LATITUDE = 34.0522;
+    const LONGITUDE = -118.2437;
+
+    const API = new URL("https://api.open-meteo.com/v1/forecast");
+
+    API.searchParams.set("latitude", LATITUDE);
+    API.searchParams.set("longitude", LONGITUDE);
+    API.searchParams.set(
+      "current",
+      "temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,is_day"
+    );
+    API.searchParams.set(
+      "daily",
+      "temperature_2m_max,temperature_2m_min"
+    );
+    API.searchParams.set("temperature_unit", "fahrenheit");
+    API.searchParams.set("timezone", "America/Los_Angeles");
+    API.searchParams.set("forecast_days", "1");
+
+    const el = id => document.getElementById(id);
+    const round = value => Math.round(value);
+
+    function weatherDescription(code) {
+      if (code === 0) return "Clear Sky";
+      if (code === 1) return "Mostly Clear";
+      if (code === 2) return "Partly Cloudy";
+      if (code === 3) return "Overcast";
+      if ([45, 48].includes(code)) return "Foggy";
+      if ([51, 53, 55, 56, 57].includes(code)) return "Drizzle";
+      if ([61, 63, 65, 66, 67].includes(code)) return "Rain";
+      if ([71, 73, 75, 77, 85, 86].includes(code)) return "Snow";
+      if ([80, 81, 82].includes(code)) return "Rain Showers";
+      if ([95, 96, 99].includes(code)) return "Thunderstorm";
+      return "Weather Unavailable";
+    }
+
+    async function updateWeather() {
+      try {
+        const response = await fetch(API.toString(), { cache: "no-store" });
+
+        if (!response.ok) throw new Error("Weather API error");
+
+        const data = await response.json();
+        const current = data.current;
+        const daily = data.daily;
+
+        if (!current || !daily || !Number.isFinite(current.temperature_2m)) {
+          throw new Error("Missing weather data");
+        }
+
+        el("temp").textContent = round(current.temperature_2m) + "°F";
+        el("condition").textContent = weatherDescription(current.weather_code);
+        el("feels").textContent = "Feels like " + round(current.apparent_temperature) + "°F";
+        el("high").textContent = "H: " + round(daily.temperature_2m_max[0]) + "°";
+        el("low").textContent = "L: " + round(daily.temperature_2m_min[0]) + "°";
+        el("humidity").textContent = "Humidity: " + round(current.relative_humidity_2m) + "%";
+      } catch (error) {
+        el("condition").textContent = "Weather unavailable";
+        el("feels").textContent = "Please try again later";
+        el("high").textContent = "H: --°";
+        el("low").textContent = "L: --°";
+        el("humidity").textContent = "Humidity: --%";
+      }
+    }
+
+    updateWeather();
+    setInterval(updateWeather, 15 * 60 * 1000);
+  </script>
 </body>
 </html>
