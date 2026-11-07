@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Notion Black & Gray Weather</title>
+  <title>Notion Compact Weather</title>
 
   <style>
     * {
@@ -16,165 +17,146 @@
       width: 100%;
       background: transparent;
       font-family: Arial, Helvetica, sans-serif;
-      overflow-x: hidden;
-    }
-
-    body {
-      padding: 6px 12px 8px 6px;
     }
 
     .card {
       width: 100%;
-      min-height: 180px;
+      height: 124px;
       background: #FFFFFF;
       border: 1px solid #E5E5E5;
       border-radius: 14px;
-      padding: 16px 18px;
+      padding: 12px 16px;
       color: #111111;
 
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-    }
-
-    .top {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+      gap: 4px;
     }
 
     .header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
       gap: 8px;
     }
 
     .label {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 600;
-      letter-spacing: 1.2px;
+      letter-spacing: 1px;
       color: #777777;
       white-space: nowrap;
     }
 
     .weather-icon {
-      width: 18px;
-      height: 18px;
+      width: 16px;
+      height: 16px;
       color: #888888;
       flex-shrink: 0;
     }
 
     .main {
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       gap: 12px;
-      margin-top: 2px;
+      margin-top: 6px;
+      min-width: 0;
     }
 
     .temp {
-      font-size: clamp(24px, 8vw, 36px);
+      font-size: clamp(23px, 7vw, 28px);
       font-weight: 700;
-      letter-spacing: -1px;
+      letter-spacing: -0.8px;
       line-height: 1.1;
       white-space: nowrap;
       font-variant-numeric: tabular-nums;
     }
 
     .summary {
-      display: flex;
-      flex-direction: column;
-      gap: 3px;
-      padding-top: 4px;
       min-width: 0;
     }
 
     .condition {
-      font-size: 12px;
+      font-size: 11px;
       color: #444444;
-      line-height: 1.35;
       white-space: nowrap;
     }
 
     .feels {
-      font-size: 12px;
+      margin-top: 3px;
+      font-size: 10px;
       color: #888888;
-      line-height: 1.35;
       white-space: nowrap;
     }
 
     .details {
       display: flex;
-      gap: 14px;
+      align-items: center;
+      gap: 10px;
       flex-wrap: wrap;
-      font-size: 12px;
+      margin-top: 7px;
+      font-size: 10px;
       color: #777777;
-      line-height: 1.4;
-      margin-top: 2px;
+      line-height: 1.2;
     }
 
     .bottom {
-      margin-top: 14px;
-    }
-
-    .divider {
-      width: 100%;
-      height: 1px;
-      background: #E5E5E5;
-      margin-bottom: 12px;
+      border-top: 1px solid #E5E5E5;
+      padding-top: 8px;
     }
 
     .footer {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 10px;
-      font-size: 10px;
+      align-items: center;
+      gap: 6px;
+      font-size: 9px;
       color: #888888;
-      letter-spacing: 0.4px;
     }
 
-    .footer-left {
+    .location {
       white-space: nowrap;
     }
 
-    .footer-right a {
+    .credit a {
       color: #888888;
       text-decoration: none;
       white-space: nowrap;
     }
 
-    .footer-right a:hover {
+    .credit a:hover {
       text-decoration: underline;
     }
 
-    @media (max-width: 240px) {
-      body {
-        padding: 5px 10px 6px 5px;
-      }
-
+    @media (max-width: 280px) {
       .card {
-        min-height: 170px;
-        padding: 12px 14px;
-        border-radius: 12px;
-      }
-
-      .label {
-        font-size: 10px;
+        padding: 10px;
       }
 
       .temp {
-        font-size: 24px;
+        font-size: 23px;
       }
 
-      .condition,
-      .feels,
+      .main {
+        gap: 6px;
+      }
+
       .details {
-        font-size: 11px;
+        gap: 5px;
+        font-size: 9px;
       }
 
       .footer {
+        font-size: 8px;
+      }
+
+      .label {
         font-size: 9px;
+      }
+
+      .credit a {
+        white-space: normal;
       }
     }
   </style>
@@ -182,7 +164,9 @@
 
 <body>
   <div class="card">
+
     <div class="top">
+
       <div class="header">
         <span class="label">CURRENT WEATHER</span>
 
@@ -193,21 +177,30 @@
              stroke-width="1.7"
              stroke-linecap="round"
              stroke-linejoin="round">
-          <path d="M21 15.5a4.5 4.5 0 0 1-4.5 4.5H8
-                   a4 4 0 0 1-.7-7.9A5.5 5.5 0 0 1 18 10
-                   a4 4 0 0 1 3 5.5Z"></path>
-          <path d="M16.5 3.5a4.5 4.5 0 1 0 0 9
-                   4.5 4.5 0 0 0 0-9Z"></path>
+          <path d="M20 16.5A4.5 4.5 0 0 0 16 10
+                   a6 6 0 0 0-11 2
+                   A4 4 0 0 0 6 20h12
+                   a3 3 0 0 0 2-3.5Z"/>
+          <path d="M16 2v3M21 7l-2 2"/>
         </svg>
       </div>
 
       <div class="main">
-        <div class="temp" id="temp">--°F</div>
+
+        <div class="temp" id="temp">
+          --°F
+        </div>
 
         <div class="summary">
-          <div class="condition" id="condition">Loading weather...</div>
-          <div class="feels" id="feels">Feels like --°F</div>
+          <div class="condition" id="condition">
+            Loading weather...
+          </div>
+
+          <div class="feels" id="feels">
+            Feels like --°F
+          </div>
         </div>
+
       </div>
 
       <div class="details">
@@ -215,38 +208,51 @@
         <span id="low">L: --°</span>
         <span id="humidity">Humidity: --%</span>
       </div>
+
     </div>
 
     <div class="bottom">
-      <div class="divider"></div>
-
       <div class="footer">
-        <div class="footer-left">LOS ANGELES · CA</div>
-        <div class="footer-right">
-          <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">
+
+        <span class="location">
+          LOS ANGELES · CA
+        </span>
+
+        <span class="credit">
+          <a href="https://open-meteo.com/"
+             target="_blank"
+             rel="noopener noreferrer">
             Weather by Open-Meteo
           </a>
-        </div>
+        </span>
+
       </div>
     </div>
+
   </div>
 
   <script>
     const LATITUDE = 34.0522;
     const LONGITUDE = -118.2437;
 
-    const API = new URL("https://api.open-meteo.com/v1/forecast");
+    const API = new URL(
+      "https://api.open-meteo.com/v1/forecast"
+    );
 
     API.searchParams.set("latitude", LATITUDE);
     API.searchParams.set("longitude", LONGITUDE);
+
     API.searchParams.set(
       "current",
-      "temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,is_day"
+      "temperature_2m,relative_humidity_2m," +
+      "apparent_temperature,weather_code,is_day"
     );
+
     API.searchParams.set(
       "daily",
       "temperature_2m_max,temperature_2m_min"
     );
+
     API.searchParams.set("temperature_unit", "fahrenheit");
     API.searchParams.set("timezone", "America/Los_Angeles");
     API.searchParams.set("forecast_days", "1");
@@ -259,35 +265,66 @@
       if (code === 1) return "Mostly Clear";
       if (code === 2) return "Partly Cloudy";
       if (code === 3) return "Overcast";
+
       if ([45, 48].includes(code)) return "Foggy";
-      if ([51, 53, 55, 56, 57].includes(code)) return "Drizzle";
-      if ([61, 63, 65, 66, 67].includes(code)) return "Rain";
-      if ([71, 73, 75, 77, 85, 86].includes(code)) return "Snow";
-      if ([80, 81, 82].includes(code)) return "Rain Showers";
-      if ([95, 96, 99].includes(code)) return "Thunderstorm";
+
+      if ([51, 53, 55, 56, 57].includes(code))
+        return "Drizzle";
+
+      if ([61, 63, 65, 66, 67].includes(code))
+        return "Rain";
+
+      if ([71, 73, 75, 77, 85, 86].includes(code))
+        return "Snow";
+
+      if ([80, 81, 82].includes(code))
+        return "Rain Showers";
+
+      if ([95, 96, 99].includes(code))
+        return "Thunderstorm";
+
       return "Weather Unavailable";
     }
 
     async function updateWeather() {
       try {
-        const response = await fetch(API.toString(), { cache: "no-store" });
+        const response = await fetch(API.toString(), {
+          cache: "no-store"
+        });
 
-        if (!response.ok) throw new Error("Weather API error");
+        if (!response.ok) {
+          throw new Error("Weather API error");
+        }
 
         const data = await response.json();
         const current = data.current;
         const daily = data.daily;
 
-        if (!current || !daily || !Number.isFinite(current.temperature_2m)) {
+        if (!current || !daily ||
+            !Number.isFinite(current.temperature_2m)) {
           throw new Error("Missing weather data");
         }
 
-        el("temp").textContent = round(current.temperature_2m) + "°F";
-        el("condition").textContent = weatherDescription(current.weather_code);
-        el("feels").textContent = "Feels like " + round(current.apparent_temperature) + "°F";
-        el("high").textContent = "H: " + round(daily.temperature_2m_max[0]) + "°";
-        el("low").textContent = "L: " + round(daily.temperature_2m_min[0]) + "°";
-        el("humidity").textContent = "Humidity: " + round(current.relative_humidity_2m) + "%";
+        el("temp").textContent =
+          round(current.temperature_2m) + "°F";
+
+        el("condition").textContent =
+          weatherDescription(current.weather_code);
+
+        el("feels").textContent =
+          "Feels like " +
+          round(current.apparent_temperature) + "°F";
+
+        el("high").textContent =
+          "H: " + round(daily.temperature_2m_max[0]) + "°";
+
+        el("low").textContent =
+          "L: " + round(daily.temperature_2m_min[0]) + "°";
+
+        el("humidity").textContent =
+          "Humidity: " +
+          round(current.relative_humidity_2m) + "%";
+
       } catch (error) {
         el("condition").textContent = "Weather unavailable";
         el("feels").textContent = "Please try again later";
