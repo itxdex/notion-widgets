@@ -4,11 +4,30 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Notion Black & Gray Weather</title>
+<title>Notion Weather - Auto Theme</title>
 
 <style>
 * {
   box-sizing: border-box;
+}
+
+:root {
+  color-scheme: light dark;
+  --text-primary: #111111;
+  --text-secondary: #777777;
+  --text-muted: #888888;
+  --text-detail: #555555;
+  --divider: #E5E5E5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-primary: #F5F5F5;
+    --text-secondary: #AAAAAA;
+    --text-muted: #999999;
+    --text-detail: #CCCCCC;
+    --divider: #373737;
+  }
 }
 
 html, body {
@@ -33,7 +52,7 @@ body {
   border-radius: 0;
   box-shadow: none;
   outline: none;
-  color: #111111;
+  color: var(--text-primary);
 
   display: flex;
   flex-direction: column;
@@ -52,15 +71,15 @@ body {
   font-weight: 600;
   letter-spacing: 1px;
   line-height: 1.2;
-  color: #777777;
+  color: var(--text-secondary);
   white-space: nowrap;
 }
 
 .weather-icon {
   width: 15px;
   height: 15px;
+  color: var(--text-muted);
   flex-shrink: 0;
-  color: #888888;
 }
 
 .main {
@@ -76,7 +95,7 @@ body {
   font-weight: 700;
   letter-spacing: -0.8px;
   line-height: 1.1;
-  color: #111111;
+  color: var(--text-primary);
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
@@ -88,7 +107,7 @@ body {
 .condition {
   font-size: 11px;
   line-height: 1.2;
-  color: #555555;
+  color: var(--text-detail);
   white-space: nowrap;
 }
 
@@ -96,7 +115,7 @@ body {
   margin-top: 3px;
   font-size: 11px;
   line-height: 1.2;
-  color: #777777;
+  color: var(--text-secondary);
   white-space: nowrap;
 }
 
@@ -108,11 +127,11 @@ body {
   margin-top: 6px;
   font-size: 10px;
   line-height: 1.2;
-  color: #777777;
+  color: var(--text-secondary);
 }
 
 .bottom {
-  border-top: 1px solid #E5E5E5;
+  border-top: 1px solid var(--divider);
   padding-top: 7px;
 }
 
@@ -123,7 +142,7 @@ body {
   gap: 6px;
   font-size: 10px;
   line-height: 1.2;
-  color: #888888;
+  color: var(--text-muted);
 }
 
 .location {
@@ -136,7 +155,7 @@ body {
 }
 
 .credit a {
-  color: #888888;
+  color: var(--text-muted);
   text-decoration: none;
   white-space: nowrap;
 }
@@ -162,8 +181,7 @@ body {
     font-size: 9px;
   }
 
-  .condition,
-  .feels {
+  .condition, .feels {
     font-size: 10px;
   }
 
@@ -172,11 +190,7 @@ body {
     font-size: 9px;
   }
 
-  .footer {
-    font-size: 8px;
-  }
-
-  .credit {
+  .footer, .credit {
     font-size: 8px;
   }
 }
@@ -188,10 +202,8 @@ body {
     gap: 10px;
   }
 
-  .condition,
-  .feels,
-  .location,
-  .credit a {
+  .condition, .feels,
+  .location, .credit a {
     white-space: normal;
   }
 
@@ -203,6 +215,7 @@ body {
 </head>
 
 <body>
+
 <div class="card">
 
   <div class="top">
@@ -248,6 +261,7 @@ body {
 
   <div class="bottom">
     <div class="footer">
+
       <span class="location">
         LOS ANGELES · CA
       </span>
@@ -259,6 +273,7 @@ body {
           Weather by Open-Meteo
         </a>
       </span>
+
     </div>
   </div>
 
@@ -354,8 +369,12 @@ async function updateWeather() {
       round(current.relative_humidity_2m) + "%";
 
   } catch (error) {
-    el("condition").textContent = "Weather unavailable";
-    el("feels").textContent = "Please try again later";
+    el("condition").textContent =
+      "Weather unavailable";
+
+    el("feels").textContent =
+      "Please try again later";
+
     el("high").textContent = "H: --°";
     el("low").textContent = "L: --°";
     el("humidity").textContent = "Humidity: --%";
@@ -365,5 +384,6 @@ async function updateWeather() {
 updateWeather();
 setInterval(updateWeather, 15 * 60 * 1000);
 </script>
+
 </body>
 </html>
