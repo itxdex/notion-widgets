@@ -3,83 +3,153 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Minimal Clock</title>
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1">
+  <title>Notion Compact Clock</title>
+
   <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      padding: 8px;
-      background: transparent;
-      font-family: Arial, sans-serif;
+    * {
+      box-sizing: border-box;
     }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      background: transparent;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
     .clock {
+      width: 100%;
+      min-width: 0;
       background: #FFFFFF;
       border: 1px solid #E5E5E5;
       border-radius: 12px;
-      padding: 22px;
+      padding: 14px;
       color: #111111;
-      width: 100%;
     }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+    }
+
     .label {
-      font-size: 11px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
       color: #777777;
-      letter-spacing: 1.5px;
-      font-weight: 600;
+      white-space: nowrap;
     }
+
+    .clock-icon {
+      width: 15px;
+      height: 15px;
+      color: #888888;
+      flex-shrink: 0;
+    }
+
     .time {
-      font-size: clamp(26px, 6vw, 46px);
-      font-weight: 600;
-      letter-spacing: -1.5px;
-      margin: 12px 0 5px;
+      margin: 10px 0 5px;
+      font-size: clamp(23px, 9vw, 36px);
+      font-weight: 700;
+      letter-spacing: -1px;
+      white-space: nowrap;
       font-variant-numeric: tabular-nums;
     }
+
     .date {
-      font-size: 14px;
+      font-size: 12px;
       color: #777777;
+      white-space: nowrap;
     }
-    .line {
+
+    .divider {
       height: 1px;
       background: #E5E5E5;
-      margin: 17px 0 12px;
+      margin: 13px 0 10px;
     }
-    .zone {
-      font-size: 11px;
+
+    .timezone {
+      font-size: 10px;
+      letter-spacing: 0.5px;
       color: #888888;
-      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    @media (max-width: 190px) {
+      .clock {
+        padding: 10px;
+      }
+
+      .time {
+        font-size: 22px;
+      }
+
+      .date {
+        font-size: 11px;
+      }
+
+      .timezone {
+        font-size: 9px;
+      }
     }
   </style>
 </head>
+
 <body>
   <div class="clock">
-    <div class="label">DIGITAL CLOCK</div>
+    <div class="header">
+      <span class="label">DIGITAL CLOCK</span>
+
+      <svg class="clock-icon"
+           viewBox="0 0 24 24"
+           fill="none"
+           stroke="currentColor"
+           stroke-width="1.7"
+           stroke-linecap="round"
+           stroke-linejoin="round">
+        <circle cx="12" cy="12" r="9"></circle>
+        <path d="M12 7v5l3 2"></path>
+      </svg>
+    </div>
+
     <div class="time" id="time">--:-- --</div>
     <div class="date" id="date">Loading...</div>
-    <div class="line"></div>
-    <div class="zone">LOS ANGELES · PACIFIC TIME</div>
+
+    <div class="divider"></div>
+
+    <div class="timezone">
+      LOS ANGELES · PT
+    </div>
   </div>
+
   <script>
-    const zone = "America/Los_Angeles";
+    const TIMEZONE = "America/Los_Angeles";
 
     function updateClock() {
       const now = new Date();
 
-      document.getElementById("time").textContent =
-        new Intl.DateTimeFormat("en-US", {
-          timeZone: zone,
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: true
-        }).format(now);
+      const time = new Intl.DateTimeFormat("en-US", {
+        timeZone: TIMEZONE,
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true
+      }).format(now);
 
-      document.getElementById("date").textContent =
-        new Intl.DateTimeFormat("en-US", {
-          timeZone: zone,
-          weekday: "long",
-          month: "long",
-          day: "numeric",
-          year: "numeric"
-        }).format(now);
+      const date = new Intl.DateTimeFormat("en-US", {
+        timeZone: TIMEZONE,
+        weekday: "short",
+        month: "short",
+        day: "numeric",
+        year: "numeric"
+      }).format(now);
+
+      document.getElementById("time").textContent = time;
+      document.getElementById("date").textContent = date;
     }
 
     updateClock();
