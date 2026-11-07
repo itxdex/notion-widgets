@@ -6,99 +6,100 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Notion Black & Gray Clock</title>
 <style>
-  * { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-  html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    background: transparent;
-    font-family: Arial, Helvetica, sans-serif;
-  }
+html, body {
+  margin: 0;
+  width: 100%;
+  background: transparent;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
-  body {
-    padding: 6px 12px 8px 6px;
-  }
+body {
+  padding: 6px 12px 8px 6px;
+}
 
-  .card {
-    width: 100%;
-    height: 122px;
-    padding: 10px 14px;
-    background: #FFFFFF;
-    border: 1px solid #E6E5E3;
-    border-radius: 14px;
-    box-shadow: none;
-    outline: none;
-    color: #111111;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
+.card {
+  width: 100%;
+  height: 122px;
+  padding: 10px 14px;
+  background: #FFFFFF;
+  border: 1px solid rgba(28, 19, 1, 0.11);
+  border-radius: 10px;
+  box-shadow: none;
+  outline: none;
+  color: #111111;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
-  .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 6px;
-  }
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
 
-  .label {
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    color: #777777;
-    white-space: nowrap;
-  }
+.label {
+  color: #777777;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
 
-  .icon {
-    width: 15px;
-    height: 15px;
-    color: #888888;
-    flex-shrink: 0;
-  }
+.icon {
+  width: 15px;
+  height: 15px;
+  color: #888888;
+  flex-shrink: 0;
+}
 
-  .time {
-    margin-top: 6px;
-    font-size: clamp(22px, 7vw, 27px);
-    font-weight: 700;
-    line-height: 1.1;
-    letter-spacing: -0.8px;
-    color: #111111;
-    white-space: nowrap;
-    font-variant-numeric: tabular-nums;
-  }
+.time {
+  margin-top: 6px;
+  font-size: clamp(22px, 7vw, 27px);
+  font-weight: 700;
+  letter-spacing: -0.8px;
+  line-height: 1.1;
+  color: #111111;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
 
-  .date {
-    margin-top: 5px;
-    font-size: 11px;
-    line-height: 1.2;
-    color: #777777;
-    white-space: nowrap;
-  }
+.date {
+  margin-top: 5px;
+  font-size: 11px;
+  line-height: 1.2;
+  color: #777777;
+  white-space: nowrap;
+}
 
-  .bottom {
-    border-top: 1px solid #E5E5E5;
-    padding-top: 7px;
-  }
+.bottom {
+  border-top: 1px solid #E5E5E5;
+  padding-top: 7px;
+}
 
-  .timezone {
-    font-size: 10px;
-    line-height: 1.2;
-    color: #888888;
-    letter-spacing: 0.3px;
-    white-space: nowrap;
-  }
+.timezone {
+  color: #888888;
+  font-size: 10px;
+  line-height: 1.2;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+}
 
-  @media (max-width: 220px) {
-    .card { padding: 10px; }
-    .time { font-size: 21px; }
-    .label, .timezone { font-size: 9px; }
-    .date { font-size: 10px; }
-  }
+@media (max-width: 220px) {
+  .card { padding: 10px; }
+  .time { font-size: 21px; }
+  .date { font-size: 10px; }
+  .label, .timezone { font-size: 9px; }
+}
 </style>
 </head>
-<body>
 
+<body>
 <div class="card">
   <div class="top">
     <div class="header">
@@ -123,31 +124,31 @@
 </div>
 
 <script>
-  const TIMEZONE = "America/Los_Angeles";
+const TIMEZONE = "America/Los_Angeles";
 
-  function updateClock() {
-    const now = new Date();
+function updateClock() {
+  const now = new Date();
 
-    document.getElementById("time").textContent =
-      new Intl.DateTimeFormat("en-US", {
-        timeZone: TIMEZONE,
-        hour: "2-digit",
-        minute: "2-digit",
-        hour12: true
-      }).format(now);
+  document.getElementById("time").textContent =
+    new Intl.DateTimeFormat("en-US", {
+      timeZone: TIMEZONE,
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true
+    }).format(now);
 
-    document.getElementById("date").textContent =
-      new Intl.DateTimeFormat("en-US", {
-        timeZone: TIMEZONE,
-        weekday: "short",
-        month: "short",
-        day: "numeric",
-        year: "numeric"
-      }).format(now);
-  }
+  document.getElementById("date").textContent =
+    new Intl.DateTimeFormat("en-US", {
+      timeZone: TIMEZONE,
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+      year: "numeric"
+    }).format(now);
+}
 
-  updateClock();
-  setInterval(updateClock, 1000);
+updateClock();
+setInterval(updateClock, 1000);
 </script>
 </body>
 </html>
