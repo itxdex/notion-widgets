@@ -4,7 +4,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Notion Weather</title>
+<title>Notion Black & Gray Weather</title>
+
 <style>
 * {
   box-sizing: border-box;
@@ -33,10 +34,10 @@ body {
   box-shadow: none;
   outline: none;
   color: #111111;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 3px;
 }
 
 .header {
@@ -50,22 +51,23 @@ body {
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 1px;
+  line-height: 1.2;
   color: #777777;
   white-space: nowrap;
 }
 
 .weather-icon {
-  width: 16px;
-  height: 16px;
-  color: #888888;
+  width: 15px;
+  height: 15px;
   flex-shrink: 0;
+  color: #888888;
 }
 
 .main {
   display: flex;
   align-items: center;
   gap: 10px;
-  margin-top: 5px;
+  margin-top: 6px;
   min-width: 0;
 }
 
@@ -86,22 +88,22 @@ body {
 .condition {
   font-size: 11px;
   line-height: 1.2;
-  color: #444444;
+  color: #555555;
   white-space: nowrap;
 }
 
 .feels {
   margin-top: 3px;
-  font-size: 10px;
+  font-size: 11px;
   line-height: 1.2;
-  color: #888888;
+  color: #777777;
   white-space: nowrap;
 }
 
 .details {
   display: flex;
   align-items: center;
-  gap: 9px;
+  gap: 8px;
   flex-wrap: wrap;
   margin-top: 6px;
   font-size: 10px;
@@ -116,16 +118,21 @@ body {
 
 .footer {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   gap: 6px;
-  font-size: 9px;
+  font-size: 10px;
   line-height: 1.2;
   color: #888888;
 }
 
 .location {
   white-space: nowrap;
+  letter-spacing: 0.3px;
+}
+
+.credit {
+  font-size: 9px;
 }
 
 .credit a {
@@ -155,6 +162,11 @@ body {
     font-size: 9px;
   }
 
+  .condition,
+  .feels {
+    font-size: 10px;
+  }
+
   .details {
     gap: 5px;
     font-size: 9px;
@@ -163,12 +175,17 @@ body {
   .footer {
     font-size: 8px;
   }
+
+  .credit {
+    font-size: 8px;
+  }
 }
 
 @media (max-width: 240px) {
   .card {
     height: auto;
     min-height: 122px;
+    gap: 10px;
   }
 
   .condition,
@@ -187,7 +204,9 @@ body {
 
 <body>
 <div class="card">
+
   <div class="top">
+
     <div class="header">
       <span class="label">CURRENT WEATHER</span>
 
@@ -224,11 +243,14 @@ body {
       <span id="low">L: --°</span>
       <span id="humidity">Humidity: --%</span>
     </div>
+
   </div>
 
   <div class="bottom">
     <div class="footer">
-      <span class="location">LOS ANGELES · CA</span>
+      <span class="location">
+        LOS ANGELES · CA
+      </span>
 
       <span class="credit">
         <a href="https://open-meteo.com/"
@@ -239,6 +261,7 @@ body {
       </span>
     </div>
   </div>
+
 </div>
 
 <script>
@@ -331,12 +354,8 @@ async function updateWeather() {
       round(current.relative_humidity_2m) + "%";
 
   } catch (error) {
-    el("condition").textContent =
-      "Weather unavailable";
-
-    el("feels").textContent =
-      "Please try again later";
-
+    el("condition").textContent = "Weather unavailable";
+    el("feels").textContent = "Please try again later";
     el("high").textContent = "H: --°";
     el("low").textContent = "L: --°";
     el("humidity").textContent = "Humidity: --%";
