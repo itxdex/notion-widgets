@@ -4,10 +4,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Notion Digital Clock</title>
+<title>Notion Digital Clock - Auto Theme</title>
+
 <style>
 * {
   box-sizing: border-box;
+}
+
+:root {
+  color-scheme: light dark;
+  --text-primary: #111111;
+  --text-secondary: #777777;
+  --text-muted: #888888;
+  --divider: #E5E5E5;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text-primary: #F5F5F5;
+    --text-secondary: #AAAAAA;
+    --text-muted: #999999;
+    --divider: #373737;
+  }
 }
 
 html, body {
@@ -32,7 +50,8 @@ body {
   border-radius: 0;
   box-shadow: none;
   outline: none;
-  color: #111111;
+  color: var(--text-primary);
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -46,7 +65,7 @@ body {
 }
 
 .label {
-  color: #777777;
+  color: var(--text-secondary);
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 1px;
@@ -56,7 +75,7 @@ body {
 .icon {
   width: 15px;
   height: 15px;
-  color: #888888;
+  color: var(--text-muted);
   flex-shrink: 0;
 }
 
@@ -66,7 +85,7 @@ body {
   font-weight: 700;
   letter-spacing: -0.8px;
   line-height: 1.1;
-  color: #111111;
+  color: var(--text-primary);
   white-space: nowrap;
   font-variant-numeric: tabular-nums;
 }
@@ -75,12 +94,12 @@ body {
   margin-top: 5px;
   font-size: 11px;
   line-height: 1.2;
-  color: #777777;
+  color: var(--text-secondary);
   white-space: nowrap;
 }
 
 .bottom {
-  border-top: 1px solid #E5E5E5;
+  border-top: 1px solid var(--divider);
   padding-top: 7px;
 }
 
@@ -88,7 +107,7 @@ body {
   font-size: 10px;
   line-height: 1.2;
   letter-spacing: 0.3px;
-  color: #888888;
+  color: var(--text-muted);
   white-space: nowrap;
 }
 
@@ -113,8 +132,11 @@ body {
 </head>
 
 <body>
+
 <div class="card">
+
   <div class="top">
+
     <div class="header">
       <span class="label">DIGITAL CLOCK</span>
 
@@ -132,6 +154,7 @@ body {
 
     <div class="time" id="time">--:-- --</div>
     <div class="date" id="date">Loading...</div>
+
   </div>
 
   <div class="bottom">
@@ -139,34 +162,46 @@ body {
       LOS ANGELES · PT
     </div>
   </div>
+
 </div>
 
 <script>
 const TIMEZONE = "America/Los_Angeles";
 
+const timeFormatter = new Intl.DateTimeFormat(
+  "en-US",
+  {
+    timeZone: TIMEZONE,
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true
+  }
+);
+
+const dateFormatter = new Intl.DateTimeFormat(
+  "en-US",
+  {
+    timeZone: TIMEZONE,
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+    year: "numeric"
+  }
+);
+
 function updateClock() {
   const now = new Date();
 
   document.getElementById("time").textContent =
-    new Intl.DateTimeFormat("en-US", {
-      timeZone: TIMEZONE,
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: true
-    }).format(now);
+    timeFormatter.format(now);
 
   document.getElementById("date").textContent =
-    new Intl.DateTimeFormat("en-US", {
-      timeZone: TIMEZONE,
-      weekday: "short",
-      month: "short",
-      day: "numeric",
-      year: "numeric"
-    }).format(now);
+    dateFormatter.format(now);
 }
 
 updateClock();
 setInterval(updateClock, 1000);
 </script>
+
 </body>
 </html>
