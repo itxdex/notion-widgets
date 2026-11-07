@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Notion Black & Gray Weather</title>
+
 <style>
 * {
   box-sizing: border-box;
@@ -12,13 +13,14 @@
 
 html, body {
   margin: 0;
+  padding: 0;
   width: 100%;
   background: transparent;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
-  padding: 6px 12px 8px 6px;
+  padding: 0 12px 8px 6px;
 }
 
 .card {
@@ -31,6 +33,7 @@ body {
   box-shadow: none;
   outline: none;
   color: #111111;
+
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -45,10 +48,10 @@ body {
 }
 
 .label {
-  color: #777777;
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 1px;
+  color: #777777;
   white-space: nowrap;
 }
 
@@ -137,12 +140,30 @@ body {
 }
 
 @media (max-width: 300px) {
-  .card { padding: 10px; }
-  .main { gap: 6px; }
-  .temp { font-size: 22px; }
-  .label { font-size: 9px; }
-  .details { gap: 5px; font-size: 9px; }
-  .footer { font-size: 8px; }
+  .card {
+    padding: 10px;
+  }
+
+  .main {
+    gap: 6px;
+  }
+
+  .temp {
+    font-size: 22px;
+  }
+
+  .label {
+    font-size: 9px;
+  }
+
+  .details {
+    gap: 5px;
+    font-size: 9px;
+  }
+
+  .footer {
+    font-size: 8px;
+  }
 }
 
 @media (max-width: 240px) {
@@ -169,8 +190,10 @@ body {
     <div class="header">
       <span class="label">CURRENT WEATHER</span>
 
-      <svg class="weather-icon" viewBox="0 0 24 24"
-           fill="none" stroke="currentColor"
+      <svg class="weather-icon"
+           viewBox="0 0 24 24"
+           fill="none"
+           stroke="currentColor"
            stroke-width="1.7"
            stroke-linecap="round"
            stroke-linejoin="round">
@@ -205,6 +228,7 @@ body {
   <div class="bottom">
     <div class="footer">
       <span class="location">LOS ANGELES · CA</span>
+
       <span class="credit">
         <a href="https://open-meteo.com/"
            target="_blank"
